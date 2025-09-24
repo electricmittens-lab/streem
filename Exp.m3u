@@ -1,3 +1,3 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="EXPTV" tvg-name="EXPTV" tvg-logo="https://exptv.org/favicon.ico" group-title="EXPTV",EXPTV
+#EXTINF:-1 tvg-id="exptv.live" tvg-name="EXPTV" tvg-logo="https://exptv.org/favicon.ico" group-title="Live TV",EXPTV
 https://exptv.org/content2/VIDEOBREAKS32.mp4
