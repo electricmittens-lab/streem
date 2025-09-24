@@ -9,7 +9,6 @@ def main():
     repo = pathlib.Path(__file__).resolve().parent
     finder = repo / "exptv_find.py"
 
-    # Run the finder to get the current MP4 link
     proc = subprocess.run(
         [sys.executable, str(finder)],
         capture_output=True,
@@ -30,14 +29,15 @@ def main():
 
     mp4_plain = lines[0]
 
-    # Force IPTV players to recognize this as Live TV
+    # EXTINF metadata tuned for Live TV
     m3u = f"""#EXTM3U
-#EXTINF:-1 tvg-id="exptv.live" tvg-name="EXPTV" tvg-logo="https://exptv.org/favicon.ico" group-title="Live TV",EXPTV
+#EXTINF:-1 tvg-id="exptv" tvg-name="EXPTV" tvg-logo="https://exptv.org/favicon.ico" group-title="TV",EXPTV
+#EXTVLCOPT--http-reconnect=true
+#EXTVLCOPT--http-continuous
 {mp4_plain}
 """
 
     out = repo / "Exp.m3u"
-
     old = out.read_text(encoding="utf-8", errors="ignore") if out.exists() else ""
     if old.strip() == m3u.strip():
         print("M3U unchanged.")
